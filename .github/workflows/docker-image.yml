@@ -1,0 +1,24 @@
+name: check mssql
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Run the action
+      uses: potatoqualitee/mssqlsuite@v1
+      with:
+        install: sqlengine, sqlpackage
+
+    - name: Run sqlclient
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d tempdb -Q "SELECT @@version;"
