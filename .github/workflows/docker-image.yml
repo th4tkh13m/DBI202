@@ -1,8 +1,7 @@
-name: check mssql
+name: Check mssql
 
 on:
-  pull_request:
-    branches: [ main ]
+  pull_request
 
 jobs:
 
@@ -28,7 +27,7 @@ jobs:
     - name: Create Tables
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/table.sql
     
-    - name: Create triggers
+    - name: Create Triggers
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/triggers.sql
       
     - name: Insert Data
