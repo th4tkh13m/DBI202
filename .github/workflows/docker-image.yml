@@ -27,8 +27,8 @@ jobs:
       run: |
         sqlcmd -S localhost -U sa -P dbatools.I0 -Q -i scripts/database.sql
     - name: create tables
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q -i scripts/table.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/table.sql
     - name: run insert
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q -i scripts/test.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/test.sql
     - name: run test
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q "SELECT * FROM STUDENT"
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory "SELECT * FROM STUDENT"
