@@ -21,12 +21,18 @@ jobs:
     - name: Run sqlclient
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d tempdb -Q "SELECT @@version;"
       
-    - name: create database
+    - name: Create Database
       run: |
         sqlcmd -S localhost -U sa -P dbatools.I0 -i scripts/database.sql
-    - name: create tables
+        
+    - name: Create Tables
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/table.sql
-    - name: run insert
+    
+    - name: Create triggers
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/triggers.sql
+      
+    - name: Insert Data
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/data.sql
+      
+    - name: Run Tests
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/test.sql
-    - name: run test
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q "SELECT * FROM STUDENT"
