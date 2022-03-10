@@ -22,3 +22,7 @@ jobs:
 
     - name: Run sqlclient
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d tempdb -Q "SELECT @@version;"
+      
+    - name: create database
+      run: |
+        sqlcmd -S localhost -U sa -P dbatools.I0 -i scripts/database.sql
