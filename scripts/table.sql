@@ -7,14 +7,12 @@ CREATE TABLE AREA
 CREATE TABLE EMPLOYEE
 (
     empCode NVARCHAR(4) PRIMARY KEY,
-    areaCode NVARCHAR(4),
     empName NVARCHAR(50),
     empSex NVARCHAR(1),
     empBirthdate DATE,
     empPhone NVARCHAR(10),
     empAddress NVARCHAR(70),
     empSSN NVARCHAR(10),
-    FOREIGN KEY(areaCode) REFERENCES AREA(areaCode)
 )
 
 CREATE TABLE ROOM
