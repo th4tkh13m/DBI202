@@ -49,7 +49,8 @@ CREATE TABLE OWN
     facCode NUMERIC(3),
     stuCode NVARCHAR(8),
     FOREIGN KEY(facCode) REFERENCES FACILITY(facCode),
-    FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode)
+    FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode),
+    CONSTRAINT PK_OWN PRIMARY KEY (facCode, stuCode)
 )
 
 
@@ -70,6 +71,7 @@ CREATE TABLE INCURRED
     elecAmount INT,
     incurredCost INT,
     FOREIGN KEY(roomCode) REFERENCES ROOM(roomCode),
+    CONSTRAINT PK_INCURRED PRIMARY KEY (roomCode, semester)
 )
 
 CREATE TABLE MANAGER 
