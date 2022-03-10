@@ -25,4 +25,10 @@ jobs:
       
     - name: create database
       run: |
-        sqlcmd -S localhost -U sa -P dbatools.I0 -i scripts/database.sql
+        sqlcmd -S localhost -U sa -P dbatools.I0 -Q -i scripts/database.sql
+    - name: create tables
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q -i scripts/table.sql
+    - name: run insert
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q -i scripts/test.sql
+    - name: run test
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q "SELECT * FROM STUDENT"
