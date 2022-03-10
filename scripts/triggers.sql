@@ -1,4 +1,4 @@
-CREATE TRIGGER studentAdd ON STUDENT
+CREATE OR ALTER TRIGGER studentAdd ON STUDENT
 AFTER INSERT, UPDATE
 AS
 BEGIN
@@ -13,10 +13,5 @@ BEGIN
     BEGIN
         PRINT('Room is full');
         ROLLBACK TRANSACTION;
-    END
-    ELSE
-    BEGIN
-        PRINT('Room is not full');
-        COMMIT TRANSACTION;
     END
 END

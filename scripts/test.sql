@@ -7,14 +7,14 @@ INSERT INTO ROOM VALUES
 
 INSERT INTO STUDENT VALUES
 (
-    'DE160023',
+    'DE160029',
     219,
-    'Test',
+    'Test 2',
     'M',
     '1999-01-01',
     '0912345678',
     'Test',
     '1234567890'
-)
+);
 
 SELECT * FROM STUDENT
