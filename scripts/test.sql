@@ -2,17 +2,17 @@ INSERT INTO AREA VALUES
 (1, 'Test')
 
 INSERT INTO ROOM VALUES
-(12345678, 1)
+(219, 1)
 
 
 INSERT INTO STUDENT VALUES
 (
-    12345678,
-    12345678,
-    'Test Student',
+    'DE160023',
+    219,
+    'Test',
     'M',
-    '2000-01-01',
+    '1999-01-01',
     '0912345678',
-    'Test Address',
+    'Test',
     '1234567890'
 )

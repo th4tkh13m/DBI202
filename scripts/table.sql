@@ -1,13 +1,13 @@
 CREATE TABLE AREA
 (
-    areaCode NUMERIC(10) PRIMARY KEY,
+    areaCode NVARCHAR(4) PRIMARY KEY,
     areName NVARCHAR(50),
 )
 
 CREATE TABLE EMPLOYEE
 (
-    empCode NUMERIC(8) PRIMARY KEY,
-    areaCode NUMERIC(10),
+    empCode NVARCHAR(4) PRIMARY KEY,
+    areaCode NVARCHAR(4),
     empName NVARCHAR(50),
     empSex NVARCHAR(1),
     empBirthdate DATE,
@@ -19,15 +19,15 @@ CREATE TABLE EMPLOYEE
 
 CREATE TABLE ROOM
 (
-    roomCode NUMERIC(8) PRIMARY KEY,
-    areaCode NUMERIC(10),
+    roomCode NUMERIC(3) PRIMARY KEY,
+    areaCode NVARCHAR(4),
     FOREIGN KEY(areaCode) REFERENCES AREA(areaCode)
 )
 
 CREATE TABLE STUDENT
 (
-    stuCode NUMERIC(8) PRIMARY KEY,
-    roomCode NUMERIC(8),
+    stuCode NVARCHAR(8) PRIMARY KEY,
+    roomCode NUMERIC(3),
     stuName NVARCHAR(50),
     stuSex NVARCHAR(1),
     stuBirthdate DATE,
@@ -39,22 +39,42 @@ CREATE TABLE STUDENT
 
 CREATE TABLE FACILITY
 (
-    facCode NUMERIC(10) PRIMARY KEY,
+    facCode NUMERIC(3) PRIMARY KEY,
     facName NVARCHAR(50),
-
+    facStatus NVARCHAR(10)
 )
 
 CREATE TABLE OWN
 (
-    facCode NUMERIC(10),
-    stuCode NUMERIC(8),
+    facCode NUMERIC(3),
+    stuCode NVARCHAR(8),
     FOREIGN KEY(facCode) REFERENCES FACILITY(facCode),
     FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode)
 )
 
 CREATE TABLE INCURRED
 (
-    roomCode NUMERIC(8),
+    roomCode NUMERIC(3),
     semester NVARCHAR(4),
-    incurredCost NUMERIC(10),
+    waterAmount INT,
+    elecAmount INT,
+    incurredCost INT,
 )
+
+CREATE TABLE INVOICE
+(
+    invCode NVARCHAR(8) PRIMARY KEY,
+    stuCode NVARCHAR(8),
+    basicCost INT,
+    totalCost INT,
+    FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode)
+)
+
+CREATE TABLE MANAGER 
+(
+    areaCode NVARCHAR(4),
+    empCode NVARCHAR(4),
+    FOREIGN KEY(areaCode) REFERENCES AREA(areaCode),
+    FOREIGN KEY(empCode) REFERENCES EMPLOYEE(empCode)
+)
+
