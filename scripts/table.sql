@@ -64,14 +64,12 @@ CREATE TABLE INVOICE
 
 CREATE TABLE INCURRED
 (   
-    invCode NVARCHAR(8),
     roomCode NUMERIC(3),
     semester NVARCHAR(4),
     waterAmount INT,
     elecAmount INT,
     incurredCost INT,
     FOREIGN KEY(roomCode) REFERENCES ROOM(roomCode),
-    FOREIGN KEY(invCode) REFERENCES INVOICE(invCode)
 )
 
 CREATE TABLE MANAGER 
