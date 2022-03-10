@@ -31,4 +31,4 @@ jobs:
     - name: run insert
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/test.sql
     - name: run test
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory "SELECT * FROM STUDENT"
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -Q "SELECT * FROM STUDENT"
