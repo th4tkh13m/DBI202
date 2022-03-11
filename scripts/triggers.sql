@@ -3,7 +3,7 @@ AFTER INSERT, UPDATE
 AS
 BEGIN
     DECLARE @count INT;
-    DECLARE @roomCode NUMERIC(3);
+    DECLARE @roomCode NVARCHAR(4);
     SELECT @roomCode = roomCode
     FROM inserted;
     SELECT @count = COUNT(*)
