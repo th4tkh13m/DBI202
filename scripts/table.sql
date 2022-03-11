@@ -10,14 +10,14 @@ CREATE TABLE EMPLOYEE
     empName NVARCHAR(50),
     empSex NVARCHAR(1),
     empBirthdate DATE,
-    empPhone NVARCHAR(10),
+    empPhone NVARCHAR(20),
     empAddress NVARCHAR(70),
-    empSSN NVARCHAR(10),
+    empSSN NVARCHAR(20),
 )
 
 CREATE TABLE ROOM
 (
-    roomCode NUMERIC(3) PRIMARY KEY,
+    roomCode NVARCHAR(4) PRIMARY KEY,
     areaCode NVARCHAR(4),
     FOREIGN KEY(areaCode) REFERENCES AREA(areaCode)
 )
@@ -25,13 +25,13 @@ CREATE TABLE ROOM
 CREATE TABLE STUDENT
 (
     stuCode NVARCHAR(8) PRIMARY KEY,
-    roomCode NUMERIC(3),
+    roomCode NVARCHAR(4),
     stuName NVARCHAR(50),
     stuSex NVARCHAR(1),
     stuBirthdate DATE,
-    stuPhone NVARCHAR(10),
+    stuPhone NVARCHAR(20),
     stuAddress NVARCHAR(70),
-    stuSSN NVARCHAR(10),
+    stuSSN NVARCHAR(20),
     FOREIGN KEY(roomCode) REFERENCES ROOM(roomCode)
 )
 
@@ -63,7 +63,7 @@ CREATE TABLE INVOICE
 
 CREATE TABLE INCURRED
 (   
-    roomCode NUMERIC(3),
+    roomCode NVARCHAR(4),
     semester NVARCHAR(4),
     waterAmount INT,
     elecAmount INT,
@@ -77,6 +77,7 @@ CREATE TABLE MANAGER
     areaCode NVARCHAR(4),
     empCode NVARCHAR(4),
     FOREIGN KEY(areaCode) REFERENCES AREA(areaCode),
-    FOREIGN KEY(empCode) REFERENCES EMPLOYEE(empCode)
+    FOREIGN KEY(empCode) REFERENCES EMPLOYEE(empCode),
+    CONSTRAINT PK_MANAGER PRIMARY KEY (areaCode, empCode)
 )
 
