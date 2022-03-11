@@ -39,30 +39,21 @@ CREATE TABLE FACILITY
 (
     facCode NUMERIC(3) PRIMARY KEY,
     facName NVARCHAR(50),
-    facStatus NVARCHAR(10)
 )
 
 CREATE TABLE OWN
 (
     facCode NUMERIC(3),
     stuCode NVARCHAR(8),
+    facStatus NVARCHAR(10),
     FOREIGN KEY(facCode) REFERENCES FACILITY(facCode),
     FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode),
     CONSTRAINT PK_OWN PRIMARY KEY (facCode, stuCode)
 )
 
 
-CREATE TABLE INVOICE
-(
-    invCode NVARCHAR(8) PRIMARY KEY,
-    stuCode NVARCHAR(8),
-    basicCost INT,
-    totalCost INT,
-    FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode)
-)
-
 CREATE TABLE INCURRED
-(   
+(
     roomCode NVARCHAR(4),
     semester NVARCHAR(4),
     waterAmount INT,
@@ -72,7 +63,17 @@ CREATE TABLE INCURRED
     CONSTRAINT PK_INCURRED PRIMARY KEY (roomCode, semester)
 )
 
-CREATE TABLE MANAGER 
+CREATE TABLE INVOICE
+(
+    invCode NVARCHAR(8) PRIMARY KEY,
+    stuCode NVARCHAR(8),
+    semester NVARCHAR(4) REFERENCES INCURRED(semester),
+    basicCost INT,
+    totalCost INT,
+    FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode)
+)
+
+CREATE TABLE MANAGER
 (
     areaCode NVARCHAR(4),
     empCode NVARCHAR(4),

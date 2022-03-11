@@ -54,3 +54,19 @@ BEGIN
         ROLLBACK TRANSACTION;
     END
 END
+GO
+
+CREATE OR ALTER TRIGGER addTotal ON INVOICE
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @total INT;
+    DECLARE @invCode NVARCHAR(8);
+    SELECT @invCode = invCode
+    FROM inserted;
+    SELECT @total = calculateTotal(@invCode);
+    UPDATE INVOICE
+    SET totalCost = @total
+    WHERE invCode = @invCode;
+END
+GO

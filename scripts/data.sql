@@ -1,4 +1,4 @@
-INSERT INTO AREA 
+INSERT INTO AREA
 VALUES
     ('KV01', N'Khu vực 1'),
     ('KV02', N'Khu vực 2'),
@@ -7,7 +7,7 @@ VALUES
     ('KV05', N'Khu vực 5');
 
 INSERT INTO EMPLOYEE
-VALUES 
+VALUES
     ('NV01', N'Khải Thuận', 'M', '1973-08-30', '0254209306', N'Xã Phước Tỉnh, Huyện Long Điền, Bà Rịa - Vũng Tàu', '0828923246'),
     ('NV02', N'Nguyễn Văn A', 'M', '1983-02-01', '8476207077', N'210 Phố Sâm, Thôn Thào Thắng, Huyện 20 Hồ Chí Minh', '9634662467'),
     ('NV03', N'Phạm Đào Nguyễn', 'F', '1998-02-22', '025420232206', N'3890 Phố Đới Khanh Duệ, Thôn Kha Hậu, Quận Xuân Vịnh Lào Cai', '0828923246'),
@@ -57,7 +57,7 @@ VALUES
     ('KV05', 'NV06');
 
 INSERT INTO ROOM
-VALUES 
+VALUES
     ('P01', 'KV01'),
     ('P02', 'KV01'),
     ('P03', 'KV01'),
@@ -87,7 +87,7 @@ VALUES
     ('P27', 'KV05');
 
 INSERT INTO STUDENT
-VALUES 
+VALUES
     ('SV100', 'P01', N'Nguyễn Văn A', 'M', '2002-02-02', '245125215252', N'Đà Nẵng', '25825728528157'),
     ('SV02', 'P01', N'Nguyễn Văn B', 'M', '2002-02-02', '245125215252', N'Đà Nẵng', '25825728528157'),
     ('SV03', 'P01', N'Nguyễn Văn C', 'M', '2002-02-02', '245125215252', N'Đà Nẵng', '25825728528157'),
