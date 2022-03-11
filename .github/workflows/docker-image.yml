@@ -24,16 +24,16 @@ jobs:
       
     - name: Create Database
       run: |
-        sqlcmd -S localhost -U sa -P dbatools.I0 -i scripts/database.sql
+        sqlcmd -S localhost -U sa -P dbatools.I0 -b -i scripts/database.sql || exit 1
         
     - name: Create Tables
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/table.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/table.sql || exit 1
     
     - name: Create Triggers
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/triggers.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/triggers.sql || exit 1
       
     - name: Insert Data
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/data.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/data.sql || exit 1
       
     - name: Run Tests
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/test.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/test.sql || exit 1
