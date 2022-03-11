@@ -30,10 +30,10 @@ jobs:
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/table.sql
     
     - name: Create Triggers
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/triggers.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/triggers.sql || exit 1
       
     - name: Insert Data
-      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/data.sql
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/data.sql || exit 1
       
     - name: Run Tests
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -i scripts/test.sql
