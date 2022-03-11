@@ -56,17 +56,25 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER TRIGGER totalIncurred ON INCURRED
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    UPDATE INCURRED
+    SET incurredCost = 6000 * waterAmount + 3500 * elecAmount
+    WHERE roomCode IN (SELECT roomCode FROM INSERTED) AND semester IN (SELECT semester FROM INSERTED);
+END
+GO
+
+
 CREATE OR ALTER TRIGGER addTotal ON INVOICE
 AFTER INSERT, UPDATE
 AS
 BEGIN
-    DECLARE @total INT;
-    DECLARE @invCode NVARCHAR(8);
-    SELECT @invCode = invCode
-    FROM inserted;
-    SELECT @total = calculateTotal(@invCode);
     UPDATE INVOICE
-    SET totalCost = @total
-    WHERE invCode = @invCode;
+    SET totalCost = basicCost + incurredCost
+    FROM (INVOICE INNER JOIN  STUDENT ON INVOICE.stuCode = STUDENT.stuCode) INNER JOIN INCURRED
+    ON INCURRED.semester = INVOICE.semester AND INCURRED.roomCode = STUDENT.roomCode
+    WHERE invCode IN (SELECT invCode FROM INSERTED);
 END
 GO

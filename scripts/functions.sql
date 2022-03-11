@@ -10,7 +10,7 @@ BEGIN
     DECLARE @roomCode NVARCHAR(4);
     DECLARE @stuCode NVARCHAR(8);
     SELECT @stuCode = stuCode
-    FROM tblStudent
+    FROM STUDENT
     WHERE stuCode = @invCode;
     SELECT @semester = semester
     FROM INVOICE
@@ -18,7 +18,7 @@ BEGIN
     SELECT @roomCode = roomCode
     FROM STUDENT
     WHERE stuCode = @stuCode;
-    SELECT @total = 6000 * waterAmount + 3500 * elecAmount
+    SELECT @total = incurredCost
     FROM INCURRED
     WHERE roomCode = @roomCode AND semester = @semester;
     SELECT @total = @total + (SELECT basicCost

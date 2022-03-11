@@ -67,7 +67,7 @@ CREATE TABLE INVOICE
 (
     invCode NVARCHAR(8) PRIMARY KEY,
     stuCode NVARCHAR(8),
-    semester NVARCHAR(4) REFERENCES INCURRED(semester),
+    semester NVARCHAR(4),
     basicCost INT,
     totalCost INT,
     FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode)
