@@ -8,8 +8,8 @@ GO
 INSERT INTO INCURRED(roomCode, semester, waterAmount, elecAmount)
 VALUES
 ('P01', 'SP20', 9, 10),
-('P02', 'SP20', 1, 0),
-('P03', 'SP20', 0, 5),
+('P02', 'SP20', 65, 10),
+('P03', 'SP20', 0, 100),
 ('P04', 'SP20', 2, 4),
 ('P05', 'SP20', 0, 9),
 ('P06', 'SP20', 0, 0),
@@ -36,12 +36,12 @@ VALUES
 ('P27', 'SP20', 0, 0)
 GO
 
-SELECT TOP 5 * FROM INCURRED
+SELECT TOP 20 * FROM INCURRED
 GO
 
 INSERT INTO INVOICE(invCode, StuCode, semester, basicCost)
 VALUES
-('INV01', 'SV100', 'SP20', 6000),
+('INV01', 'SV01', 'SP20', 6000),
 ('INV02', 'SV02', 'SP20', 6000),
 ('INV03', 'SV03', 'SP20', 6000),
 ('INV04', 'SV04', 'SP20', 6000),
@@ -71,5 +71,5 @@ VALUES
 ('INV28', 'SV28', 'SP20', 6000),
 ('INV29', 'SV29', 'SP20', 6000)
 GO
-SELECT TOP 5 * FROM INVOICE
+SELECT TOP 20 * FROM INVOICE
 
