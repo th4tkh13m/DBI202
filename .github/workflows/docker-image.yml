@@ -6,8 +6,16 @@ on:
   pull_request:
     
 jobs:
+  Lint: 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: SQL Lint
+        uses: Bidaya0/sql-lint-in-action@v0.0.2
+        with: 
+          path: 'scripts'
 
-  build:
+  Check:
 
     runs-on: ubuntu-latest
 
