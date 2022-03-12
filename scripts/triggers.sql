@@ -15,3 +15,60 @@ BEGIN
         ROLLBACK TRANSACTION;
     END
 END
+GO
+
+
+CREATE OR ALTER TRIGGER roomLimit ON ROOM
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @count INT;
+    DECLARE @areaCode NVARCHAR(4);
+    SELECT @areaCode = areaCode
+    FROM inserted;
+    SELECT @count = COUNT(*)
+    FROM ROOM
+    WHERE areaCode = @areaCode;
+    IF (@count > 30)
+    BEGIN
+        PRINT('Area is full');
+        ROLLBACK TRANSACTION;
+    END
+END
+GO
+
+CREATE OR ALTER TRIGGER totalIncurred ON INCURRED
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @elecLimit INT;
+    DECLARE @waterLimit INT;
+    SET @elecLimit = 50;
+    SET @waterLimit = 50;
+    UPDATE INCURRED
+    SET incurredCost =
+    CASE
+        WHEN (elecAmount > @elecLimit AND waterAmount > @waterLimit) THEN (elecAmount - @elecLimit) * 3500 + (waterAmount - @waterLimit) * 6000
+        WHEN (elecAmount > @elecLimit) THEN (elecAmount - @elecLimit) * 3500
+        WHEN (waterAmount > @waterLimit) THEN (waterAmount - @waterLimit) * 6000
+        ELSE 0
+    END
+    WHERE roomCode IN (SELECT roomCode
+        FROM INSERTED) AND semester IN (SELECT semester
+        FROM INSERTED);
+END
+GO
+
+-- Edit me!
+CREATE OR ALTER TRIGGER addTotal ON INVOICE
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    UPDATE INVOICE
+    SET totalCost = basicCost + incurredCost / dbo.calculateRoomNumber(INCURRED.roomCode)
+    FROM (INVOICE INNER JOIN STUDENT ON INVOICE.stuCode = STUDENT.stuCode) INNER JOIN INCURRED
+        ON INCURRED.semester = INVOICE.semester AND INCURRED.roomCode = STUDENT.roomCode
+    WHERE invCode IN (SELECT invCode
+    FROM INSERTED);
+END
+GO
