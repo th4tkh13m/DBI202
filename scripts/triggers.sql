@@ -17,25 +17,6 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER limitFacility ON OWN
-AFTER INSERT, UPDATE
-AS
-BEGIN
-    DECLARE @count INT;
-    DECLARE @facCode NUMERIC(3);
-    SELECT @facCode = facCode
-    FROM inserted;
-    SELECT @count = COUNT(*)
-    FROM OWN
-    WHERE facCode = @facCode;
-    IF (@count > 1)
-    BEGIN
-        PRINT('Each student own only one facility');
-        ROLLBACK TRANSACTION;
-    END
-END
-GO
-
 
 CREATE OR ALTER TRIGGER roomLimit ON ROOM
 AFTER INSERT, UPDATE
@@ -60,21 +41,34 @@ CREATE OR ALTER TRIGGER totalIncurred ON INCURRED
 AFTER INSERT, UPDATE
 AS
 BEGIN
+    DECLARE @elecLimit INT;
+    DECLARE @waterLimit INT;
+    SET @elecLimit = 50;
+    SET @waterLimit = 50;
     UPDATE INCURRED
-    SET incurredCost = 6000 * waterAmount + 3500 * elecAmount
-    WHERE roomCode IN (SELECT roomCode FROM INSERTED) AND semester IN (SELECT semester FROM INSERTED);
+    SET incurredCost =
+    CASE
+        WHEN (elecAmount > @elecLimit AND waterAmount > @waterLimit) THEN (elecAmount - @elecLimit) * 3500 + (waterAmount - @waterLimit) * 6000
+        WHEN (elecAmount > @elecLimit) THEN (elecAmount - @elecLimit) * 3500
+        WHEN (waterAmount > @waterLimit) THEN (waterAmount - @waterLimit) * 6000
+        ELSE 0
+    END
+    WHERE roomCode IN (SELECT roomCode
+        FROM INSERTED) AND semester IN (SELECT semester
+        FROM INSERTED);
 END
 GO
 
-
+-- Edit me!
 CREATE OR ALTER TRIGGER addTotal ON INVOICE
 AFTER INSERT, UPDATE
 AS
 BEGIN
     UPDATE INVOICE
     SET totalCost = basicCost + incurredCost
-    FROM (INVOICE INNER JOIN  STUDENT ON INVOICE.stuCode = STUDENT.stuCode) INNER JOIN INCURRED
-    ON INCURRED.semester = INVOICE.semester AND INCURRED.roomCode = STUDENT.roomCode
-    WHERE invCode IN (SELECT invCode FROM INSERTED);
+    FROM (INVOICE INNER JOIN STUDENT ON INVOICE.stuCode = STUDENT.stuCode) INNER JOIN INCURRED
+        ON INCURRED.semester = INVOICE.semester AND INCURRED.roomCode = STUDENT.roomCode
+    WHERE invCode IN (SELECT invCode
+    FROM INSERTED);
 END
 GO

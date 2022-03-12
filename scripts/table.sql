@@ -37,13 +37,13 @@ CREATE TABLE STUDENT
 
 CREATE TABLE FACILITY
 (
-    facCode NUMERIC(3) PRIMARY KEY,
+    facCode NVARCHAR(4) PRIMARY KEY,
     facName NVARCHAR(50),
 )
 
 CREATE TABLE OWN
 (
-    facCode NUMERIC(3),
+    facCode NVARCHAR(4),
     stuCode NVARCHAR(8),
     facStatus NVARCHAR(10),
     FOREIGN KEY(facCode) REFERENCES FACILITY(facCode),
