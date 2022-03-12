@@ -6,7 +6,7 @@ RETURNS INT
 AS
 BEGIN
     RETURN (SELECT COUNT(*)
-        FROM STUDENT
-        WHERE roomCode = @roomCode);
+    FROM STUDENT
+    WHERE roomCode = @roomCode);
 END
 GO

@@ -137,7 +137,7 @@ VALUES
     ('VC02', N'Bàn'),
     ('VC03', N'Tủ'),
     ('VC04', N'Giường')
- 
+
 INSERT INTO OWN
 VALUES
     ('VC01', 'SV01', N'Tốt'),
