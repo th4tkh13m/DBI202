@@ -43,8 +43,8 @@ AS
 BEGIN
     DECLARE @elecLimit INT;
     DECLARE @waterLimit INT;
-    SET @elecLimit = 50;
-    SET @waterLimit = 50;
+    SET @elecLimit = 1600;
+    SET @waterLimit = 108;
     UPDATE INCURRED
     SET incurredCost =
     CASE
