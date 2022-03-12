@@ -65,7 +65,7 @@ AFTER INSERT, UPDATE
 AS
 BEGIN
     UPDATE INVOICE
-    SET totalCost = basicCost + incurredCost
+    SET totalCost = basicCost + incurredCost / dbo.calculateRoomNumber(INCURRED.roomCode)
     FROM (INVOICE INNER JOIN STUDENT ON INVOICE.stuCode = STUDENT.stuCode) INNER JOIN INCURRED
         ON INCURRED.semester = INVOICE.semester AND INCURRED.roomCode = STUDENT.roomCode
     WHERE invCode IN (SELECT invCode
