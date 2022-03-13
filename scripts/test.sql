@@ -58,3 +58,6 @@ GO
 
 EXEC room_incurred 'P12'
 GO
+
+SELECT * FROM INVOICE
+GO

@@ -69,6 +69,7 @@ BEGIN
         ON INCURRED.semester = INVOICE.semester AND INCURRED.roomCode = STUDENT.roomCode
     WHERE invCode IN (SELECT invCode
     FROM INSERTED);
+    DELETE FROM INVOICE WHERE totalCost IS NULL;
 END
 GO
 
