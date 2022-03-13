@@ -59,7 +59,6 @@ BEGIN
 END
 GO
 
--- Edit me!
 CREATE OR ALTER TRIGGER addTotal ON INVOICE
 AFTER INSERT, UPDATE
 AS
@@ -72,3 +71,21 @@ BEGIN
     FROM INSERTED);
 END
 GO
+
+CREATE OR ALTER TRIGGER changeRoom ON STUDENT
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @roomCode NVARCHAR(4);
+    DECLARE @oldRoomCode NVARCHAR(4);
+    SELECT @roomCode = roomCode
+    FROM inserted;
+    SELECT @oldRoomCode = roomCode
+    FROM deleted;
+    IF (@roomCode <> @oldRoomCode)
+    BEGIN
+        UPDATE STUDENT
+        SET roomCode = @roomCode
+        WHERE roomCode = @oldRoomCode;
+    END
+END
