@@ -44,3 +44,27 @@ SELECT TOP 20 * FROM INVOICE
 UPDATE STUDENT
 SET roomCode = 'P02'
 WHERE stuCode = 'SV10'
+
+
+CREATE OR ALTER PROCEDURE printInvoice
+    @stuCode NVARCHAR(8) 
+AS
+
+SELECT inv.invCode, stu.stuName, stu.roomCode , inv.semester, inv.basicCost, inv.totalCost
+FROM STUDENT stu INNER JOIN INVOICE inv ON stu.stuCode = inv.stuCode
+WHERE  stu.stuCode = @stuCode
+GO
+
+EXEC printInvoice 'SV29'
+
+GO
+CREATE OR ALTER PROCEDURE room_incurred
+    @roomCode NVARCHAR(4)
+AS
+
+SELECT r.roomCode , inc.semester, inc.incurredCost
+FROM ROOM r INNER JOIN INCURRED inc ON r.roomCode = inc.roomCode
+WHERE r.roomCode = @roomCode
+
+GO
+EXEC room_incurred 'P12'
