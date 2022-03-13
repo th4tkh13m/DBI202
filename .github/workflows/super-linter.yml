@@ -9,6 +9,8 @@ name: Lint Code Base
 on:
   schedule:
     - cron: '0 18 * * *'
+  push:
+  pull_request:
 jobs:
   run-lint:
     runs-on: ubuntu-latest
