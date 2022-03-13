@@ -53,11 +53,33 @@ SET roomCode = 'P02'
 WHERE stuCode = 'SV10'
 GO
 
-EXEC printInvoice 'SV29'
+EXEC printInvoiceHistory 'SV29'
 GO
 
-EXEC room_incurred 'P12'
+EXEC roomIncurredHistory 'P12'
 GO
 
-SELECT * FROM INVOICE
+SELECT *
+FROM INVOICE
+GO
+
+EXEC checkoutStudent 'SV18', 'SU21'
+GO
+SELECT *
+FROM STUDENT
+WHERE stuCode = 'SV18'
+GO
+
+BEGIN TRY 
+
+EXEC checkoutStudent 'SV21', 'SU21'
+END TRY
+BEGIN CATCH
+PRINT 'TEST PASS'
+END CATCH
+
+GO
+SELECT *
+FROM STUDENT
+WHERE stuCode = 'SV21'
 GO
