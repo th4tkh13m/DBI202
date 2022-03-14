@@ -32,6 +32,9 @@ jobs:
     - name: Create Functions
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/functions.sql || exit 1
 
+    - name: Create Procedures
+      run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/procedures.sql || exit 1
+
     - name: Create Triggers
       run: sqlcmd -S localhost -U sa -P dbatools.I0 -d FUDormitory -b -i scripts/triggers.sql || exit 1
       
