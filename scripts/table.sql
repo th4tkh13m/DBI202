@@ -8,7 +8,7 @@ CREATE TABLE EMPLOYEE
 (
     empCode NVARCHAR(4) PRIMARY KEY,
     empName NVARCHAR(50),
-    empSex NVARCHAR(1),
+    empSex NVARCHAR(1) CHECK (empSex IN ('M', 'F')),
     empBirthdate DATE,
     empPhone NVARCHAR(20),
     empAddress NVARCHAR(70),
@@ -27,7 +27,7 @@ CREATE TABLE STUDENT
     stuCode NVARCHAR(8) PRIMARY KEY,
     roomCode NVARCHAR(4),
     stuName NVARCHAR(50),
-    stuSex NVARCHAR(1),
+    stuSex NVARCHAR(1) CHECK(stuSex IN ('M', 'F')),
     stuBirthdate DATE,
     stuPhone NVARCHAR(20),
     stuAddress NVARCHAR(70),
@@ -45,7 +45,7 @@ CREATE TABLE OWN
 (
     facCode NVARCHAR(4),
     stuCode NVARCHAR(8),
-    facStatus NVARCHAR(10),
+    facStatus NVARCHAR(10) CHECK(facStatus IN (N'Tốt', N'Hỏng', N'Mất')),
     FOREIGN KEY(facCode) REFERENCES FACILITY(facCode),
     FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode),
     CONSTRAINT PK_OWN PRIMARY KEY (facCode, stuCode)
