@@ -45,7 +45,7 @@ CREATE TABLE OWN
 (
     facCode NVARCHAR(4),
     stuCode NVARCHAR(8),
-    facStatus NVARCHAR(10) CHECK(facStatus IN (N'Tốt', N'Hỏng', N'Mất')),
+    facStatus NVARCHAR(10) CHECK(facStatus IN (N'Tốt', N'Hỏng', N'Mất')) DEFAULT N'Tốt',
     FOREIGN KEY(facCode) REFERENCES FACILITY(facCode),
     FOREIGN KEY(stuCode) REFERENCES STUDENT(stuCode),
     CONSTRAINT PK_OWN PRIMARY KEY (facCode, stuCode)
