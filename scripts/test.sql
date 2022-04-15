@@ -59,10 +59,6 @@ GO
 EXEC roomIncurredHistory 'P12'
 GO
 
-SELECT *
-FROM INVOICE
-GO
-
 EXEC checkoutStudent 'SV18', 'SU21'
 GO
 SELECT *
@@ -71,7 +67,6 @@ WHERE stuCode = 'SV18'
 GO
 
 BEGIN TRY 
-
 EXEC checkoutStudent 'SV21', 'SU21'
 END TRY
 BEGIN CATCH
